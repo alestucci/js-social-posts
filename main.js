@@ -129,14 +129,18 @@ function createPost(postObject) {
 	const container = document.querySelector(".posts-list");
 	//console.log(container);
 	const socialPost = document.createElement("div");
+    let authorAvatar;
+    if (postObject.author.image !== null) {
+        authorAvatar = `<img class="profile-pic" src="${postObject.author.image}" alt="${postObject.author.name}">`                 
+    } else {
+        authorAvatar = `<div class="profile-pic-default"><span>${initialsOfStringWords(postObject.author.name)}<span></div>`
+    }
 	socialPost.classList.add("post");
     socialPost.id = postObject.id;
 	socialPost.innerHTML = `
 <div class="post__header">
     <div class="post-meta">                    
-        <div class="post-meta__icon">
-            <img class="profile-pic" src="${postObject.author.image}" alt="${postObject.author.name}">                    
-        </div>
+        <div class="post-meta__icon">${authorAvatar}</div>
         <div class="post-meta__data">
             <div class="post-meta__author">${postObject.author.name}</div>
             <div class="post-meta__time">${dateToIt(postObject.created)}</div>
