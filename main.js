@@ -72,23 +72,58 @@ for (let index = 0; index < posts.length; index++) {
 const likeBtn = [...document.querySelectorAll(".like-button")];
 //console.log(likeBtn);
 const userLikedPost = [];
-const likesCounterArray = [...document.querySelectorAll('#like-counter-1')];
-console.log(likesCounterArray);
+const likesCounterArray = [...document.querySelectorAll("#like-counter-1")];
+//console.log(likesCounterArray);
 
 for (let index = 0; index < likeBtn.length; index++) {
 	likeBtn[index].addEventListener("click", function () {
 		likeBtn[index].classList.toggle("like-button--liked");
-        //console.log(likeBtn[index].parentElement.parentElement.parentElement.parentElement.id);
-        const likedId = likeBtn[index].parentElement.parentElement.parentElement.parentElement.id;
-        if (userLikedPost.indexOf(likedId) == -1) {
-            userLikedPost.push(likedId);
-            likesCounterArray[index].innerText++
-        } else {
-            userLikedPost.splice(userLikedPost.indexOf(likedId), 1);
-            likesCounterArray[index].innerText--
-        }
-        console.log(userLikedPost);
+		//console.log(likeBtn[index].parentElement.parentElement.parentElement.parentElement.id);
+		const likedId =
+			likeBtn[index].parentElement.parentElement.parentElement.parentElement.id;
+		if (userLikedPost.indexOf(likedId) == -1) {
+			userLikedPost.push(likedId);
+			likesCounterArray[index].innerText++;
+		} else {
+			userLikedPost.splice(userLikedPost.indexOf(likedId), 1);
+			likesCounterArray[index].innerText--;
+		}
+		console.log(userLikedPost);
 	});
+}
+
+function dateToUs (dateAMG) {
+    const year = dateAMG.slice(0, 4);
+    //console.log(year);
+    const month = dateAMG.slice(5, 7);
+    //console.log(month);
+    const day = dateAMG.slice(8, 10);
+    //console.log(day);
+    dateUS = month + '-' + day + '-' + year;
+    return dateUS
+}
+
+function dateToIt (dateAMG) {
+    const year = dateAMG.slice(0, 4);
+    //console.log(year);
+    const month = dateAMG.slice(5, 7);
+    //console.log(month);
+    const day = dateAMG.slice(8, 10);
+    //console.log(day);
+    dateIT = day + '-' + month + '-' + year;
+    return dateIT
+}
+
+function initialsOfStringWords(string) {
+	let initials = "";
+	initials += string[0];
+    //console.log(initials);
+	while (string.indexOf(" ") !== -1) {
+		string = string.slice(string.indexOf(" ") + 1);
+        //console.log(string);
+		initials += string[0];
+	}
+	return initials;
 }
 
 function createPost(postObject) {
@@ -96,7 +131,7 @@ function createPost(postObject) {
 	//console.log(container);
 	const socialPost = document.createElement("div");
 	socialPost.classList.add("post");
-    socialPost.id = postObject.id;
+	socialPost.id = postObject.id;
 	socialPost.innerHTML = `
 <div class="post__header">
     <div class="post-meta">                    
@@ -105,7 +140,7 @@ function createPost(postObject) {
         </div>
         <div class="post-meta__data">
             <div class="post-meta__author">${postObject.author.name}</div>
-            <div class="post-meta__time">${postObject.created}</div>
+            <div class="post-meta__time">${dateToUs(postObject.created)}</div>
         </div>                    
     </div>
 </div>
