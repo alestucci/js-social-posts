@@ -66,16 +66,38 @@ const posts = [
 // console.log(posts[0].author);
 
 for (let index = 0; index < posts.length; index++) {
-    createPost(posts[index]);
+	createPost(posts[index]);
 }
 
+const likeBtn = [...document.querySelectorAll(".like-button")];
+//console.log(likeBtn);
+const userLikedPost = [];
+const likesCounterArray = [...document.querySelectorAll('#like-counter-1')];
+console.log(likesCounterArray);
+
+for (let index = 0; index < likeBtn.length; index++) {
+	likeBtn[index].addEventListener("click", function () {
+		likeBtn[index].classList.toggle("like-button--liked");
+        //console.log(likeBtn[index].parentElement.parentElement.parentElement.parentElement.id);
+        const likedId = likeBtn[index].parentElement.parentElement.parentElement.parentElement.id;
+        if (userLikedPost.indexOf(likedId) == -1) {
+            userLikedPost.push(likedId);
+            likesCounterArray[index].innerText++
+        } else {
+            userLikedPost.splice(userLikedPost.indexOf(likedId), 1);
+            likesCounterArray[index].innerText--
+        }
+        console.log(userLikedPost);
+	});
+}
 
 function createPost(postObject) {
-const container = document.querySelector(".posts-list");
-//console.log(container);
-const socialPost = document.createElement("div");
-socialPost.classList.add('post');
-socialPost.innerHTML = `
+	const container = document.querySelector(".posts-list");
+	//console.log(container);
+	const socialPost = document.createElement("div");
+	socialPost.classList.add("post");
+    socialPost.id = postObject.id;
+	socialPost.innerHTML = `
 <div class="post__header">
     <div class="post-meta">                    
         <div class="post-meta__icon">
@@ -105,5 +127,5 @@ socialPost.innerHTML = `
     </div> 
 </div>
 `;
-container.append(socialPost);
+	container.append(socialPost);
 }
