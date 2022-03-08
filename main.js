@@ -91,6 +91,40 @@ for (let index = 0; index < likeBtn.length; index++) {
 	});
 }
 
+function dateToUs (dateAMG) {
+    const year = dateAMG.slice(0, 4);
+    //console.log(year);
+    const month = dateAMG.slice(5, 7);
+    //console.log(month);
+    const day = dateAMG.slice(8, 10);
+    //console.log(day);
+    dateUS = month + '-' + day + '-' + year;
+    return dateUS
+}
+
+function dateToIt (dateAMG) {
+    const year = dateAMG.slice(0, 4);
+    //console.log(year);
+    const month = dateAMG.slice(5, 7);
+    //console.log(month);
+    const day = dateAMG.slice(8, 10);
+    //console.log(day);
+    dateIT = day + '-' + month + '-' + year;
+    return dateIT
+}
+
+function initialsOfStringWords(string) {
+	let initials = "";
+	initials += string[0];
+    //console.log(initials);
+	while (string.indexOf(" ") !== -1) {
+		string = string.slice(string.indexOf(" ") + 1);
+        //console.log(string);
+		initials += string[0];
+	}
+	return initials;
+}
+
 function createPost(postObject) {
 	const container = document.querySelector(".posts-list");
 	//console.log(container);
@@ -105,7 +139,7 @@ function createPost(postObject) {
         </div>
         <div class="post-meta__data">
             <div class="post-meta__author">${postObject.author.name}</div>
-            <div class="post-meta__time">${postObject.created}</div>
+            <div class="post-meta__time">${dateToUs(postObject.created)}</div>
         </div>                    
     </div>
 </div>
