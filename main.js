@@ -139,7 +139,7 @@ function createPost(postObject) {
         </div>
         <div class="post-meta__data">
             <div class="post-meta__author">${postObject.author.name}</div>
-            <div class="post-meta__time">${dateToUs(postObject.created)}</div>
+            <div class="post-meta__time">${dateToIt(postObject.created)}</div>
         </div>                    
     </div>
 </div>
